@@ -14,7 +14,7 @@ public class DailyStatus {
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resident_id", nullable = false)
+    @JoinColumn(name = "id_resident", nullable = false)
     private Resident resident;
 
     @Enumerated(EnumType.STRING)
