@@ -14,7 +14,10 @@ public class ResidentService {
     public ResidentService(ResidentRepository repository) {
         this.repository = repository;
     }
-
+    public Resident delete(Resident resident) {
+        repository.delete(resident);
+        return resident;
+    }
 
     public Resident create(Resident resident) {
         return repository.save(resident);
@@ -25,4 +28,15 @@ public class ResidentService {
         return repository.findAll();
     }
 
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
+    public Resident findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public void update(Resident resident) {
+        repository.save(resident);
+    }
 }

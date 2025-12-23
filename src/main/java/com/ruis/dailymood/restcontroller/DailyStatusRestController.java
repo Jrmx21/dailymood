@@ -1,4 +1,4 @@
-package com.ruis.dailymood.controller;
+package com.ruis.dailymood.restcontroller;
 
 import com.ruis.dailymood.domain.entity.DailyStatus;
 import com.ruis.dailymood.service.DailyStatusService;
@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/daily-status")
-public class DailyStatusController {
+public class DailyStatusRestController {
 
     private final DailyStatusService service;
 
-    public DailyStatusController(DailyStatusService service) {
+    public DailyStatusRestController(DailyStatusService service) {
         this.service = service;
     }
 

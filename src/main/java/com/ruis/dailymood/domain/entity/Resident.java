@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,17 +19,18 @@ public class Resident {
 
     private String name;
     private String surnames;
-    private Date birthDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate birthDate;
     private String conditions;
     private String room;
 
     // getters y setters
 
-    public Long getId_resident() {
+    public Long getId() {
         return id;
     }
 
-    public void setId_resident(Long id_resident) {
+    public void setId(Long id_resident) {
         this.id = id_resident;
     }
 
@@ -47,13 +50,14 @@ public class Resident {
         this.surnames = surnames;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
 
     public String getConditions() {
         return conditions;
