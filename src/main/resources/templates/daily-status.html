@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Daily Status</title>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<!--With bootstrap-->
+<div class="container mt-4">
+    <ul class="dropdown-menu">
+        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+    </ul>
+    <h2 class="mb-4">Daily Status List</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Observations</th>
+            <th scope="col">State</th>
+            <th scope="col">Resident</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dailyStatus : ${dailyStatuses}">
+            <td th:text="${dailyStatus.date}">1</td>
+            <td th:text="${dailyStatus.observations}">John Doe</td>
+            <td th:text="${dailyStatus.statusType}">30</td>
+            <td th:text="${dailyStatus.resident.name + ' ' + dailyStatus.resident.room}">A101</td>
+            <td>
+                <a th:href="@{'/daily-statuses/form/' + ${dailyStatus.id}}" class="btn btn-primary btn-sm">Edit</a>
+                <a th:href="@{'/daily-statuses/delete/' + ${dailyStatus.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this resident?');">Delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/daily-statuses/form}" class="btn btn-secondary mb-3">New Daily Status</a>
+
+</div>
+
+
+</body>
+</html>

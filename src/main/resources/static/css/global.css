@@ -1,0 +1,34 @@
+/* Navbar horizontal con color llamativo */
+.custom-navbar {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b); /* degradado moderno */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    padding: 0.5rem 1rem;
+}
+
+/* Links del navbar */
+.custom-navbar .nav-link {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover */
+.custom-navbar .nav-link:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+}
+
+/* Item activo */
+.custom-navbar .active > .nav-link {
+    border-bottom: 3px solid #ffd700;
+    color: #ffd700;
+}
+
+/* Icono del toggler personalizado */
+.navbar-toggler {
+    border-color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/ %3E%3C/svg%3E");
+}

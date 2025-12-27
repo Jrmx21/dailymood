@@ -23,4 +23,16 @@ public class DailyStatusService {
     public List<DailyStatus> findAll() {
         return repository.findAll();
     }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+
+    public DailyStatus findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public void update(DailyStatus dailyStatus) {
+        repository.save(dailyStatus);
+    }
 }
