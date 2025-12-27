@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,22 +29,18 @@ public class GlobalControllerAdvice {
         return request;
     }
 
-    @ExceptionHandler(Exception.class) // Captura cualquier excepción
+    @ExceptionHandler(Exception.class)
     public String handleException(HttpServletRequest request, Exception ex, Model model) {
-        // Guardamos la URL de donde vino el error y el mensaje
         model.addAttribute("errorMessage", ex.getMessage());
-        model.addAttribute("errorPage", request.getRequestURI());
-        // Devolvemos la misma vista que provocó el error
-        return getViewFromRequest(request);
-    }
 
-    // Método simple para determinar la vista según la URL
-    private String getViewFromRequest(HttpServletRequest request){
-        String uri = request.getRequestURI();
-        if(uri.equals("/")) return "index";
-        // Ajusta según tus rutas
-        if(uri.startsWith("/items")) return "items";
-        // por defecto
-        return "index";
+        // Convertir stack trace a String
+        StringWriter sw = new StringWriter();
+        ex.printStackTrace(new PrintWriter(sw));
+        String stackTrace = sw.toString();
+
+        model.addAttribute("errorTrace", stackTrace);
+
+        model.addAttribute("navItems", navItems()); // para navbar
+        return "error"; // nombre de la vista error.html
     }
 }
