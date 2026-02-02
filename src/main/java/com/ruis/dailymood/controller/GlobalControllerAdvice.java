@@ -20,6 +20,7 @@ public class GlobalControllerAdvice {
         List<Map<String, String>> navItems = new ArrayList<>();
         navItems.add(Map.of("url", "/daily-statuses", "label", "Daily Status"));
         navItems.add(Map.of("url", "/residents", "label", "Residents"));
+        navItems.add(Map.of("url", "/family-member", "label", "Families"));
         navItems.add(Map.of("url", "/settings", "label", "Settings"));
         return navItems;
     }

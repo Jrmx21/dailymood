@@ -1,14 +1,12 @@
 package com.ruis.dailymood.domain.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Resident {
@@ -24,6 +22,10 @@ public class Resident {
     private String conditions;
     private String room;
 
+    @OneToMany(mappedBy = "resident")
+    private List<DailyStatus> dailyStatuses;
+
+
     // getters y setters
 
     public Long getId() {
@@ -36,6 +38,14 @@ public class Resident {
 
     public String getName() {
         return name;
+    }
+
+    public List<DailyStatus> getDailyStatuses() {
+        return dailyStatuses;
+    }
+
+    public void setDailyStatuses(List<DailyStatus> dailyStatuses) {
+        this.dailyStatuses = dailyStatuses;
     }
 
     public void setName(String name) {

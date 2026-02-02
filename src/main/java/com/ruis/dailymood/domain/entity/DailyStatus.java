@@ -7,6 +7,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Entity
+@Table(
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = {"id_resident", "date"}
+        )
+)
 public class DailyStatus {
 
     @Id
@@ -14,7 +19,7 @@ public class DailyStatus {
     private Long id;
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_resident", nullable = false)

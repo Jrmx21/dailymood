@@ -25,7 +25,7 @@ public class DailyStatusController {
     public String showDailyStatus(Model model) {
         List<DailyStatus> allDailyStatuses = dailyStatusService.findAll();
         model.addAttribute("dailyStatuses", allDailyStatuses);
-        return "daily-status.html";
+        return "daily_status.html";
     }
 
     @GetMapping("/daily-statuses/delete/{id}")
@@ -47,7 +47,7 @@ public class DailyStatusController {
         }
         model.addAttribute("dailyStatus", dailyStatus);
         model.addAttribute("residents", residentService.findAll());
-        return "daily-status-form.html"; // una sola vista para crear y editar
+        return "daily_status_form.html"; // una sola vista para crear y editar
     }
 
     @PostMapping("/daily-statuses/save")
