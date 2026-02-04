@@ -1,6 +1,6 @@
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">DailyMood</a>
+        <a class="navbar-brand" href="/">DailyMood</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item" th:each="item : ${navItems}"
-                    th:classappend="${request.requestURI == item.url} ? 'active' : ''">
+                    th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI == item.url} ? 'active' : ''">
                     <a class="nav-link" th:href="@{${item.url}}" th:text="${item.label}"></a>
                 </li>
             </ul>
