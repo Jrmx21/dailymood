@@ -9,9 +9,9 @@
  <div th:insert="fragments/navbar :: navbar"></div>
 <div class="container mt-4">
     <!-- return button-->
-    <a th:href="@{/daily-statuses}" class="btn btn-secondary mb-3">Back to DailyStatus List</a>
+    <a th:href="@{/daily_status}" class="btn btn-secondary mb-3">Back to DailyStatus List</a>
     <h2 class="mb-4" th:text="${dailyStatus.id} != null ? 'Edit Daily Status' : 'Register Daily Status'"></h2>
-    <form th:action="@{/daily-statuses/save}" th:object="${dailyStatus}" method="post">
+    <form th:action="@{/daily_status/save}" th:object="${dailyStatus}" method="post">
         <input type="hidden" th:field="*{id}" />
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>

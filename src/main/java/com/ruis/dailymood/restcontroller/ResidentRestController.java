@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/get-residents")
+@RequestMapping("/api/get_residents")
 public class ResidentRestController {
 
     private final ResidentService service;

@@ -34,8 +34,8 @@
             <td th:text="${member.phoneNumber}">123456789</td>
             <td th:text="${member.receiveStatusNotifications ? 'Yes' : 'No'}">Yes</td>
             <td>
-                <a th:href="@{'/family-member/edit/' + ${member.id}}" class="btn btn-primary btn-sm">Edit</a>
-                <a th:href="@{'/family-member/delete/' + ${member.id}}"
+                <a th:href="@{'/family_member/edit/' + ${member.id}}" class="btn btn-primary btn-sm">Edit</a>
+                <a th:href="@{'/family_member/delete/' + ${member.id}}"
                    class="btn btn-danger btn-sm"
                    onclick="return confirm('Are you sure you want to delete this member?');">Delete</a>
             </td>
@@ -43,7 +43,7 @@
         </tbody>
     </table>
 
-    <a th:href="@{/family-member/form}" class="btn btn-secondary mb-3">New Family Member</a>
+    <a th:href="@{/family_member/form}" class="btn btn-secondary mb-3">New Family Member</a>
 </div>
 
 </body>

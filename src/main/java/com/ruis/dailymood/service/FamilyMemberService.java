@@ -18,6 +18,26 @@ public class FamilyMemberService {
         return repository.findAll();
     }
 
+    public FamilyMember create(FamilyMember familyMember) {
+        return repository.save(familyMember);
+    }
+
+    public void update(FamilyMember familyMember) {
+        repository.save(familyMember);
+    }
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
+    public void delete(FamilyMember familyMember) {
+        repository.delete(familyMember);
+    }
+    public FamilyMember findById(Long id) {
+        return
+                repository.findById(id).orElse(null);
+    }
+    public FamilyMember save(FamilyMember familyMember) {
+        return repository.save(familyMember);
+    }
 
 
 }

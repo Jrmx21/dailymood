@@ -21,26 +21,26 @@ public class DailyStatusController {
     @Autowired
     private DailyStatusService dailyStatusService;
 
-    @GetMapping("/daily-statuses")
+    @GetMapping("/daily_status")
     public String showDailyStatus(Model model) {
         List<DailyStatus> allDailyStatuses = dailyStatusService.findAll();
         model.addAttribute("dailyStatuses", allDailyStatuses);
         return "daily_status.html";
     }
 
-    @GetMapping("/daily-statuses/delete/{id}")
+    @GetMapping("/daily_status/delete/{id}")
     public String deleteDailyStatus(@PathVariable("id") Long id) {
         dailyStatusService.deleteById(id);
-        return "redirect:/daily-statuses";
+        return "redirect:/daily_status";
     }
 
-    @GetMapping({"/daily-statuses/form", "/daily-statuses/form/{id}"})
+    @GetMapping({"/daily_status/form", "/daily_status/form/{id}"})
     public String dailyStatusForm(@PathVariable(required = false) Long id, Model model) {
         DailyStatus dailyStatus;
         if (id != null) {
             dailyStatus = dailyStatusService.findById(id); // busca el estado diario existente
             if (dailyStatus == null) {
-                return "redirect:/daily-statuses"; // si no existe, vuelve a la lista
+                return "redirect:/daily_status"; // si no existe, vuelve a la lista
             }
         } else {
             dailyStatus = new DailyStatus(); // si no hay id, es un nuevo estado diario
@@ -50,7 +50,7 @@ public class DailyStatusController {
         return "daily_status_form.html"; // una sola vista para crear y editar
     }
 
-    @PostMapping("/daily-statuses/save")
+    @PostMapping("/daily_status/save")
     public String saveOrUpdateDailyStatus(@ModelAttribute("dailyStatus") DailyStatus dailyStatus
     ) {
         if (dailyStatus.getId() != null) {
@@ -60,6 +60,6 @@ public class DailyStatusController {
             // crear nuevo
             dailyStatusService.create(dailyStatus);
         }
-        return "redirect:/daily-statuses";
+        return "redirect:/daily_status";
     }
 }
