@@ -39,4 +39,12 @@ public class ResidentService {
     public void update(Resident resident) {
         repository.save(resident);
     }
+
+    public List<Resident> findAllById(List<Long> residentIds) {
+        return repository.findAllById(residentIds);
+    }
+
+    public List<Resident> findByNameContainingIgnoreCase(String keyword) {
+        return repository.findByNameContainingIgnoreCase(keyword);
+    }
 }

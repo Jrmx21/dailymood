@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ResidentRepository extends JpaRepository<Resident, Long> {
     List<Resident> findAll();
-
+    List<Resident> findByNameContainingIgnoreCase(String name);
 }

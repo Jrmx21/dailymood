@@ -3,6 +3,7 @@ package com.ruis.dailymood.domain.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ManyToAny;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,13 +11,20 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JoinTable( name = "family_resident", joinColumns = @JoinColumn(name = "family_id"), inverseJoinColumns = @JoinColumn(name = "resident_id") )
+    @ManyToMany
+    private List<Resident> residents = new ArrayList<>();
 
-    @ManyToOne
-    private Resident resident;
-
+    public Family(List<FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
+    }
 
     @OneToMany(mappedBy = "family")
     private List<FamilyMember> familyMembers;
+
+    public Family() {
+
+    }
 
     public Long getId() {
         return id;
@@ -26,12 +34,12 @@ public class Family {
         this.id = id;
     }
 
-    public Resident getResident() {
-        return resident;
+    public List<Resident> getResidents() {
+        return residents;
     }
 
-    public void setResident(Resident resident) {
-        this.resident = resident;
+    public void setResidents(List<Resident> residents) {
+        this.residents = residents;
     }
 
     public List<FamilyMember> getFamilyMembers() {

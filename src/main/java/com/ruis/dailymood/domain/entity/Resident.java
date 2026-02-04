@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,18 @@ public class Resident {
     private List<DailyStatus> dailyStatuses;
 
 
+    @ManyToMany(mappedBy = "residents")
+    private List<Family> families = new ArrayList<>();
+
     // getters y setters
+
+    public List<Family> getFamilies() {
+        return families;
+    }
+
+    public void setFamilies(List<Family> families) {
+        this.families = families;
+    }
 
     public Long getId() {
         return id;
