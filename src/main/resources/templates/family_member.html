@@ -22,6 +22,7 @@
             <th scope="col">Birth Date</th>
             <th scope="col">Phone</th>
             <th scope="col">Notifications</th>
+            <th scope="col">Residents</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -33,6 +34,11 @@
             <td th:text="${member.birthDate}">1980-01-01</td>
             <td th:text="${member.phoneNumber}">123456789</td>
             <td th:text="${member.receiveStatusNotifications ? 'Yes' : 'No'}">Yes</td>
+            <td>
+    <span th:each="resident, iterStat : ${member.family.residents}"
+          th:text="${resident.name + ' ' + resident.surnames + (iterStat.last ? '' : ', ')}">
+    </span>
+            </td>
             <td>
                 <a th:href="@{'/family_member/edit/' + ${member.id}}" class="btn btn-primary btn-sm">Edit</a>
                 <a th:href="@{'/family_member/delete/' + ${member.id}}"
