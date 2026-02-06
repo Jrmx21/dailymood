@@ -19,7 +19,7 @@
     <form th:action="@{/family_member/save}" th:object="${familyMember}" method="post">
 
         <input type="hidden" th:field="*{id}"/>
-
+        <input type="hidden" th:field="*{family.id}"/>
         <div class="row mb-3">
             <div class="col-md-6">
                 <label class="form-label">Name</label>

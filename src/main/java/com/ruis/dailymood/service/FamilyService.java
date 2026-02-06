@@ -16,4 +16,8 @@ public class FamilyService {
         return repository.save(family);
     }
 
+    public Family findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
 }

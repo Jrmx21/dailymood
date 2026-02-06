@@ -32,7 +32,26 @@ class FamilyController {
         return "family_member";
     }
 
-    @GetMapping("/family_member/delete/{id}")
+    @GetMapping("/family_member/add_family/{id}")
+    public String showAddMemberForm(@RequestParam(required = false) String keyword,
+                                             Model model,
+                                                @PathVariable("id") Long familyId
+    ) {
+        FamilyMember familyMember = new FamilyMember();
+        familyMember.setFamily(familyService.findById(familyId));
+        model.addAttribute("familyMember", familyMember);
+
+        List<Resident> residents = (keyword == null || keyword.isBlank())
+                ? residentService.findAll()
+                : residentService.findByNameContainingIgnoreCase(keyword);
+
+        model.addAttribute("residents", residents);
+        model.addAttribute("keyword", keyword);
+
+        return "family_member_form";
+    }
+
+        @GetMapping("/family_member/delete/{id}")
     public String deleteFamilyMember(@PathVariable("id") Long id) {
         familyMemberService.deleteById(id);
         return "redirect:/family_member";
@@ -71,24 +90,25 @@ class FamilyController {
     @PostMapping("/family_member/save")
     public String saveFamilyMember(
             @ModelAttribute FamilyMember familyMember,
-            @RequestParam(required = false) List<Long> residentIds // Ahora sí, como lista
+            @RequestParam(required = false) List<Long> residentIds
     ) {
-        // 1. Asegurar que existe la familia
-        Family family = familyMember.getFamily();
-        if (family == null) {
-            family = new Family();
+        if (familyMember.getFamily() == null || familyMember.getFamily().getId() == null) {
+            throw new IllegalStateException("Family no puede ser null");
         }
 
-        // 2. Si vienen IDs, buscamos los objetos y los metemos en la lista de la familia
+        Family family = familyService.findById(familyMember.getFamily().getId());
+
         if (residentIds != null && !residentIds.isEmpty()) {
             List<Resident> chosenResidents = residentService.findAllById(residentIds);
-            family.setResidents(chosenResidents); // <--- Aquí es donde usas la lista
-            familyService.save(family); // Guardamos la familia con sus residentes
-            familyMember.setFamily(family);
+            family.setResidents(chosenResidents);
+            familyService.save(family);
         }
 
+        familyMember.setFamily(family);
         familyMemberService.save(familyMember);
+
         return "redirect:/family_member";
     }
+
 
 }
