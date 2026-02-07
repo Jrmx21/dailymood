@@ -1,0 +1,9 @@
+.git/
+.gitignore
+#mvn/  # comentado para incluir .mvn en el contexto de build
+__pycache__/
+*.pyc
+.idea/
+*.iml
+.DS_Store
+node_modules/
