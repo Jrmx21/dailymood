@@ -1,45 +1,83 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Residents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
- <div th:insert="fragments/navbar :: navbar"></div>
-<!--With bootstrap-->
-<div class="container mt-4">
-    <ul class="dropdown-menu">
-        <li><h6 class="dropdown-header">Dropdown header</h6></li>
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-    </ul>
-    <h2 class="mb-4">Residents List</h2>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Apartment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="resident : ${residents}">
-            <td th:text="${resident.id}">1</td>
-            <td th:text="${resident.name + ' '+ resident.surnames}">John Doe</td>
-            <td th:text="${resident.birthDate}">30</td>
-            <td th:text="${resident.room}">A101</td>
-            <td>
-                <a th:href="@{'/residents/form/' + ${resident.id}}" class="btn btn-primary btn-sm">Edit</a>
-                <a th:href="@{'/residents/delete/' + ${resident.id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this resident?');">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/residents/form}" class="btn btn-secondary mb-3">New Resident</a>
-</div>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+<!-- Navbar -->
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<main class="max-w-6xl mx-auto px-4 py-6">
+
+    <!-- Header -->
+    <h1 class="text-3xl font-bold mb-6 flex items-center gap-2">
+        🏠 Residents List
+    </h1>
+
+    <!-- Table wrapper -->
+    <div class="bg-white shadow-lg rounded-2xl overflow-x-auto">
+
+        <table class="w-full border-collapse" role="table" aria-label="Residents list">
+            <thead class="bg-slate-200 text-slate-700 text-left">
+            <tr>
+                <th class="px-4 py-3 font-semibold">ID</th>
+                <th class="px-4 py-3 font-semibold">Name</th>
+                <th class="px-4 py-3 font-semibold">Apartment</th>
+                <th class="px-4 py-3 font-semibold">Birth Date</th>
+                <th class="px-4 py-3 font-semibold">Actions ⚡</th>
+            </tr>
+            </thead>
+
+            <tbody class="divide-y divide-slate-200">
+            <tr th:each="resident : ${residents}"
+                class="hover:bg-slate-50 focus-within:bg-slate-50 transition">
+
+                <td class="px-4 py-3" th:text="${resident.id}">1</td>
+                <td class="px-4 py-3" th:text="${resident.name + ' ' + resident.surnames}">John Doe</td>
+                <td class="px-4 py-3" th:text="${resident.room}">A101</td>
+                <td class="px-4 py-3" th:text="${resident.birthDate}">30</td>
+
+                <td class="px-4 py-3 flex gap-2">
+                    <a th:href="@{'/residents/form/' + ${resident.id}}"
+                       class="inline-flex items-center px-3 py-1.5 rounded-lg
+                              bg-blue-600 text-white text-sm font-semibold
+                              hover:bg-blue-700
+                              focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        ✏️ Edit
+                    </a>
+
+                    <a th:href="@{'/residents/delete/' + ${resident.id}}"
+                       onclick="return confirm('Are you sure you want to delete this resident?');"
+                       class="inline-flex items-center px-3 py-1.5 rounded-lg
+                              bg-red-600 text-white text-sm font-semibold
+                              hover:bg-red-700
+                              focus:outline-none focus:ring-2 focus:ring-red-400">
+                        🗑️ Delete
+                    </a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- New Resident Button -->
+    <div class="mt-6">
+        <a th:href="@{/residents/form}"
+           class="inline-flex items-center px-6 py-2 rounded-xl
+                  bg-slate-600 text-white font-semibold
+                  hover:bg-slate-700
+                  focus:outline-none focus:ring-2 focus:ring-slate-400">
+            ➕ New Resident
+        </a>
+    </div>
+
+</main>
+
 </body>
 </html>

@@ -1,18 +1,27 @@
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">DailyMood</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item" th:each="item : ${navItems}"
-                    th:classappend="${#httpServletRequest != null and #httpServletRequest.requestURI == item.url} ? 'active' : ''">
-                    <a class="nav-link" th:href="@{${item.url}}" th:text="${item.label}"></a>
+<nav th:fragment="navbar"
+     class="bg-blue-600 text-white shadow-lg"
+     role="navigation"
+     aria-label="Main navigation">
+
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- Brand -->
+            <a href="/"
+               class="text-xl font-bold focus:outline-none focus:ring-2 focus:ring-white rounded">
+                🧠 DailyMood
+            </a>
+
+            <!-- Menu -->
+            <ul class="flex gap-6 items-center">
+                <li th:each="item : ${navItems}">
+                    <a th:href="@{${item.url}}"
+                       th:text="${item.label}"
+                       class="font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-white rounded px-1">
+                    </a>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>

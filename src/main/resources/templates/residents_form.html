@@ -2,41 +2,118 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <title>Resident</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Resident</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
- <div th:insert="fragments/navbar :: navbar"></div>
-<div class="container mt-4">
-    <!-- return button-->
-    <a th:href="@{/residents}" class="btn btn-secondary mb-3">Back to Residents List</a>
-    <h2 class="mb-4" th:text="${resident.id} != null ? 'Edit Resident' : 'Register New Resident'"></h2>
-    <form th:action="@{/residents/save}" th:object="${resident}" method="post">
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+<!-- Navbar -->
+<div th:insert="fragments/navbar :: navbar"></div>
+
+<main class="max-w-3xl mx-auto px-4 py-6">
+
+
+
+    <form th:action="@{/residents/save}"
+    th:object="${resident}"
+    method="post"
+    class="bg-white rounded-2xl shadow-lg p-6 space-y-6">
+        <!-- Back Button -->
+        <a th:href="@{/residents}"
+           class="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mb-6">
+            ⬅️ Back to Residents List
+        </a>
+        <!-- Title -->
+        <h2 class="text-2xl font-bold mb-8"
+        th:text="${resident.id} != null ? '✏️ Edit Resident' : '📝 Register New Resident'">
+            Resident Form
+        </h2>
+
         <input type="hidden" th:field="*{id}" />
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter name" required>
+
+        <!-- Name -->
+        <div>
+            <label for="name" class="block font-medium mb-1">
+                🧑 Name
+            </label>
+            <input type="text"
+                   id="name"
+                   th:field="*{name}"
+                   placeholder="Enter name"
+                   required
+                   class="w-full rounded-lg border border-slate-300 px-4 py-2
+                          focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Surnames </label>
-            <input type="text" class="form-control" id="surnames" th:field="*{surnames}" placeholder="Enter name" required>
+
+        <!-- Surnames -->
+        <div>
+            <label for="surnames" class="block font-medium mb-1">
+                📝 Surnames
+            </label>
+            <input type="text"
+                   id="surnames"
+                   th:field="*{surnames}"
+                   placeholder="Enter surnames"
+                   required
+                   class="w-full rounded-lg border border-slate-300 px-4 py-2
+                          focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-3">
-            <label for="birthDate" class="form-label">Birth Date</label>
-            <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}" required>
+
+        <!-- Birth Date -->
+        <div>
+            <label for="birthDate" class="block font-medium mb-1">
+                📅 Birth Date
+            </label>
+            <input type="date"
+                   id="birthDate"
+                   th:field="*{birthDate}"
+                   required
+                   class="w-full rounded-lg border border-slate-300 px-4 py-2
+                          focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-3">
-            <label for="room" class="form-label">Apartment</label>
-            <input type="text" class="form-control" id="room" th:field ="*{room}"
-            placeholder="Enter apartment" required>
+
+        <!-- Apartment -->
+        <div>
+            <label for="room" class="block font-medium mb-1">
+                🏢 Apartment
+            </label>
+            <input type="text"
+                   id="room"
+                   th:field="*{room}"
+                   placeholder="Enter apartment"
+                   required
+                   class="w-full rounded-lg border border-slate-300 px-4 py-2
+                          focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Conditions </label>
-            <input type="text" class="form-control" id="conditions" th:field="*{conditions}" placeholder="Enter Conditions">
+
+        <!-- Conditions -->
+        <div>
+            <label for="conditions" class="block font-medium mb-1">
+                ⚕️ Conditions
+            </label>
+            <input type="text"
+                   id="conditions"
+                   th:field="*{conditions}"
+                   placeholder="Enter Conditions"
+                   class="w-full rounded-lg border border-slate-300 px-4 py-2
+                          focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <button type="submit" class="btn btn-primary" th:text="${resident.id} != null ? 'Update Resident' : 'Create Resident'"></button>
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl
+                           focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    th:text="${resident.id} != null ? '✅ Update Resident' : '🚀 Create Resident'">
+                Submit
+            </button>
+        </div>
+
     </form>
-</div>
+</main>
 
 </body>
 </html>
