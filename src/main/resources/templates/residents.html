@@ -18,6 +18,17 @@
     <h1 class="text-3xl font-bold mb-6 flex items-center gap-2">
         🏠 Residents List
     </h1>
+    <!-- New Resident Button -->
+    <div class="mt-6">
+        <a th:href="@{/residents/form}"
+           class="inline-flex items-center px-6 py-2 rounded-xl
+                  bg-slate-600 text-white font-semibold
+                  hover:bg-slate-700
+                  focus:outline-none focus:ring-2 focus:ring-slate-400">
+            ➕ New Resident
+        </a>
+    </div>
+    <br>
 
     <!-- Table wrapper -->
     <div class="bg-white shadow-lg rounded-2xl overflow-x-auto">
@@ -40,7 +51,9 @@
                 <td class="px-4 py-3" th:text="${resident.id}">1</td>
                 <td class="px-4 py-3" th:text="${resident.name + ' ' + resident.surnames}">John Doe</td>
                 <td class="px-4 py-3" th:text="${resident.room}">A101</td>
-                <td class="px-4 py-3" th:text="${resident.birthDate}">30</td>
+                <td class="px-4 py-3"
+                    th:text="${resident.birthDate != null ? #temporals.format(resident.birthDate, 'dd/MM/yyyy') : ''}">
+                </td>
 
                 <td class="px-4 py-3 flex gap-2">
                     <a th:href="@{'/residents/form/' + ${resident.id}}"
@@ -66,16 +79,7 @@
         </table>
     </div>
 
-    <!-- New Resident Button -->
-    <div class="mt-6">
-        <a th:href="@{/residents/form}"
-           class="inline-flex items-center px-6 py-2 rounded-xl
-                  bg-slate-600 text-white font-semibold
-                  hover:bg-slate-700
-                  focus:outline-none focus:ring-2 focus:ring-slate-400">
-            ➕ New Resident
-        </a>
-    </div>
+
 
 </main>
 

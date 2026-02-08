@@ -1,6 +1,7 @@
 package com.ruis.dailymood.domain.entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class FamilyMember {
     private String surnames;
 
     private String email;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     private String phoneNumber;
