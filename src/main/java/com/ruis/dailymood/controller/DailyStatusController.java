@@ -1,8 +1,13 @@
 package com.ruis.dailymood.controller;
 
 import com.ruis.dailymood.domain.entity.DailyStatus;
+import com.ruis.dailymood.domain.entity.Family;
+import com.ruis.dailymood.domain.entity.FamilyMember;
 import com.ruis.dailymood.domain.entity.Resident;
+import com.ruis.dailymood.microservices.EmailService;
 import com.ruis.dailymood.service.DailyStatusService;
+import com.ruis.dailymood.service.FamilyMemberService;
+import com.ruis.dailymood.service.FamilyService;
 import com.ruis.dailymood.service.ResidentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +22,15 @@ public class DailyStatusController {
     @Autowired
     private ResidentService residentService;
 
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     private DailyStatusService dailyStatusService;
+    @Autowired
+    private FamilyService familyService;
+    @Autowired
+    private FamilyMemberService familyMemberService;
 
     @GetMapping("/daily_status")
     public String showDailyStatus(Model model) {
@@ -60,6 +71,12 @@ public class DailyStatusController {
             // crear nuevo
             dailyStatusService.create(dailyStatus);
         }
+        List<FamilyMember> familiyMembers = familyMemberService.findByResidentIdThroughFamily(dailyStatus.getResident().getId());
+        String[] toSendEmails = new String[familiyMembers.size()];
+        for (int i = 0; i < familiyMembers.size(); i++) {
+            toSendEmails[i] = familiyMembers.get(i).getEmail();
+        }
+        // emailService.sendEmail("Test Subject", "This is a test OF DAILY STATUS email body.", toSendEmails);
         return "redirect:/daily_status";
     }
 }

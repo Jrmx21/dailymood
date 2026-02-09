@@ -39,5 +39,7 @@ public class FamilyMemberService {
         return repository.save(familyMember);
     }
 
-
+    public List<FamilyMember> findByResidentIdThroughFamily(Long residentId) {
+        return repository.findByResidentIdThroughFamily(residentId);
+    }
 }
